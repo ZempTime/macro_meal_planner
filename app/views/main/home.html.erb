@@ -1,0 +1,76 @@
+<div id="buttons">
+  <%= link_to "+ Add Meal", "#", id: "add-meal-button", class: "btn btn-primary" %>
+  <button class="btn btn-success" data-toggle="modal" data-target=".macros-modal">Edit Macros</button>
+  <%= link_to "+ Add Food", "#", id: "add-edible-button", class: "btn btn-info" %>
+
+  <div class="pull-right">
+    <%= label_tag "Increment By:" %>
+    <%= text_field_tag "increment_amount", "1" %>
+  </div>
+</div>
+
+<h1>Meals</h1>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2 class="panel-title">Meal Name</h2>
+  </div>
+  <div class="panel-body">
+    Panel content
+  </div>
+  <div class="panel-footer">
+    Total:
+  </div>
+</div>
+
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h2 class="panel-title">Totals</h2>
+  </div>
+  <div class="panel-body">
+    Panel content
+  </div>
+</div>
+
+
+<div class="modal fade macros-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Macros</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for [current_user, @macro_requirements], url: user_update_macros_path do |f| %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Carbs</th>
+              <th>Protein</th>
+              <th>Fat</th>
+              <th>Fiber</th>
+              <th class="calorie-border">Calories</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td><%= f.number_field :carbs %></td>
+              <td><%= f.number_field :protein %></td>
+              <td><%= f.number_field :fat %></td>
+              <td><%= f.number_field :fiber %></td>
+              <td class="calorie-border"><%= f.number_field :total_calories %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <%= f.submit "Save", class: "btn btn-primary" %>
+      <% end %>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

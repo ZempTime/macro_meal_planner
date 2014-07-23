@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MacroMealPlanner</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <% if notice %>
+    <div class="temp alert alert-info alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= notice %>
+    </div>
+  <% end %>
+
+  <% if alert %>
+    <div class="temp alert alert-warning alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= alert %>
+    </div>
+  <% end %>
+
+    <div class="container">
+      <div class="header">
+        <ul class="nav nav-pills pull-right">
+          <% if user_signed_in? %>
+            <li class="active"><%= link_to "Home", user_home_path(current_user) %></li>
+            <li><%= link_to "Account", edit_user_registration_path %></a></li>
+            <li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></li>
+          <% else %>
+            <li><%= link_to "Sign Up", new_user_registration_path %><li>
+          <% end %>
+            <li><%= link_to "About", root_path %></li>
+        </ul>
+        <h3 class="text-muted">MacroMealPlanner</h3>
+      </div>
+
+  <%= yield %>
+
+
+<div class="footer">
+  <p>&copy; This is a footer</p>
+</div>
+  
+
+</body>
+</html>
